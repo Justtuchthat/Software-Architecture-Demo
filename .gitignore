@@ -1,0 +1,5 @@
+# General vscode things
+.vscode
+
+# python venv directory
+venv
