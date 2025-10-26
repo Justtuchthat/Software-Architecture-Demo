@@ -31,7 +31,7 @@ deactivate
 
 ## Key binds
 
-After running the project, you will start in 'mode 0'. Pressing keyboard numbers 0, 1, and 2 will change the project into their respective modes. Pressing keyboard number 3 will generate a regular triangular grid of sensors, each with 180 units of distance and a 200-unit radius of range. 
+After running the project, you will start in 'mode 0'. Pressing keyboard numbers 0, 1, and 2 will change the project into their respective modes. Pressing keyboard number 3 will generate a regular triangular grid of sensors, each with 180 units of distance and a 200-unit radius of range. Pressing escape will end the demo.
 
 
 ### Mode 0
