@@ -3,3 +3,4 @@
 
 # python venv directory
 venv
+__pycache__
