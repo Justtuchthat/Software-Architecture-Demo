@@ -23,6 +23,7 @@ class Sensor():
         self.range = calc_dist(pygame.Vector2(x, y), pygame.Vector2(range_x, range_y))
         self.connected_sensors: list[Sensor|Hub] = []
         self.visited = False
+        self.disabled = False
 
         # Virtual MQTT setup
         self.topic = f"mesh/sensor/{self.id}"
@@ -35,6 +36,7 @@ class Sensor():
         broker.subscribe(other.topic, self.on_message)
 
     def on_message(self, topic: str, message: str) -> None:
+        if self.disabled: return
         try:
             msg_id, content = message.split(":", 1)
         except ValueError:
@@ -55,6 +57,7 @@ class Sensor():
                 neighbor.publish(f"From Sensor {self.id}: {content}", msg_id)
     
     def publish(self, message: str, msg_id: str | None = None) -> None:
+        if self.disabled: return
         if msg_id == None:
             msg_id = str(uuid.uuid4())
         self.seen_messages.add(msg_id)
@@ -145,7 +148,8 @@ def delete_sensor(sensor_list: list[Sensor], mouse_pos: pygame.Vector2) -> None:
         print("Cannot delete any sensors when none have been placed")
         return
     if closest_dist < 10:
-        sensor_list.pop(closest)
+        s = sensor_list.pop(closest)
+        s.disabled = True
     else:
         print("No sensor was close to click to remove")
 
