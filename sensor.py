@@ -129,7 +129,7 @@ def send_message_on_click(sensor_list: list[Sensor], mouse_pos: pygame.Vector2) 
         print("Cannot send message from any sensors when none have been placed")
         return
     if closest_dist < 10:
-        sensor_list[closest].publish(f"sensor #{closest} got clicked!")
+        sensor_list[closest].publish(f"sensor #{sensor_list[closest].id} got clicked!")
     else:
         print("No sensor was close to click to send message")
 
